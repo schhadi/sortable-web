@@ -28,7 +28,7 @@ export function TopBar() {
           {BRAND}
         </a>
 
-        <button type="button" className="topbar-search" onClick={summonSearch}>
+        <button type="button" className="topbar-search" onClick={() => summonSearch()}>
           <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
             <circle
               cx="10.5"
@@ -53,8 +53,9 @@ export function TopBar() {
         </button>
 
         <nav className="topbar-nav" aria-label="Sections">
-          <a href="#idea">The idea</a>
+          <a href="#problem">The problem</a>
           <a href="#price">{PRICE}</a>
+          <a href="#questions">Five questions</a>
         </nav>
       </div>
     </div>

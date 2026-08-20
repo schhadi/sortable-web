@@ -370,6 +370,8 @@ a:hover { color: var(--color-accent-700); }
 .hero-sub {
   font-size: clamp(1.05rem, 1.8vw, 1.3rem);
   line-height: 1.5;
+  /* The note's tagline, set the way the note sets it. */
+  font-style: italic;
   color: var(--ink-muted);
   max-width: 46ch;
   text-wrap: pretty;
@@ -744,7 +746,9 @@ mark {
   padding: clamp(3rem, 8vh, 6rem) 0;
 }
 
-.idea h2 {
+/* A copy scene: kicker, headline, an optional lede, running text. The problem,
+   what it is, and who it's for are all set this way. */
+.copy h2 {
   font-size: clamp(2rem, 4.8vw, 3.4rem);
   line-height: 1.06;
   letter-spacing: -0.022em;
@@ -752,16 +756,85 @@ mark {
   margin: 0 0 1.4rem;
   text-wrap: balance;
 }
-.idea-lede {
+.copy-lede {
   font-size: clamp(1.1rem, 1.9vw, 1.35rem);
   line-height: 1.55;
   max-width: 40ch;
   margin: 0 0 2.25rem;
 }
-.idea-body { max-width: var(--measure); font-size: 1.08rem; line-height: 1.7; }
-.idea-body p { margin: 0 0 1.25rem; }
-.idea-body p:last-child { margin-bottom: 0; }
-.idea-body strong { font-weight: 600; }
+.copy-body { max-width: var(--measure); font-size: 1.08rem; line-height: 1.7; }
+.copy-body p { margin: 0 0 1.25rem; }
+.copy-body p:last-child { margin-bottom: 0; }
+.copy-body strong { font-weight: 600; }
+
+/* The inline cousin of .hint-try: same voice, but it inherits the copy's size. */
+.copy-try {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-style: italic;
+  color: var(--color-accent-700);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.copy-try:hover { color: var(--color-accent-800); }
+
+/* ── the feature grid and the two promises ──────────────────────────────────
+   The note's long middle. Taller than a viewport, so these scenes flow instead
+   of centring — a 100svh grid of ten entries would leave most of it unread. */
+
+.scene--flow { min-height: 0; align-content: start; }
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  margin-top: 0.75rem;
+}
+@media (max-width: 44rem) {
+  .features { grid-template-columns: minmax(0, 1fr); }
+}
+/* Each entry under its own hairline of ink — the note's own typography. */
+.feature { border-top: 1px solid var(--color-text); padding: 1rem 0 1.9rem; }
+.feature h3 { font-size: 1.1rem; margin: 0 0 0.55rem; letter-spacing: -0.01em; }
+.feature p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.62;
+  color: var(--color-neutral-800);
+  text-wrap: pretty;
+}
+
+.promises {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-top: 0.75rem;
+}
+@media (max-width: 44rem) {
+  .promises { grid-template-columns: minmax(0, 1fr); }
+}
+/* Promises are content, so the cards are paper, not glass — one headed in each
+   of the two process accents. */
+.promise {
+  background: var(--paper);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+.promise h3 { font-size: 1.05rem; margin: 0 0 0.5rem; }
+.promise--cyan h3 { color: var(--color-accent-700); }
+.promise--magenta h3 { color: var(--color-accent-2-700); }
+.promise p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.62;
+  color: var(--color-neutral-800);
+  text-wrap: pretty;
+}
 
 /* ── the price ──────────────────────────────────────────────────────────── */
 
@@ -895,9 +968,8 @@ mark {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   Dormant — the three-questions block. The redesign has no response form and
-   `components/ResponseForm.tsx` is no longer mounted; these rules are kept so
-   re-adding it is one import. See NOTES.md.
+   The questions block — dormant through the redesign, mounted again now that
+   the note asks its five questions on the page. See NOTES.md.
    ═══════════════════════════════════════════════════════════════════════ */
 
 .questions { padding: clamp(3.5rem, 9vw, 6rem) 0 0; }
@@ -912,16 +984,20 @@ mark {
   color: var(--color-accent-700);
   margin-bottom: 0.75rem;
 }
+/* The note's questions run longer than the original three — a shade smaller
+   and a wider measure, so none of them sets as a tower of single words. */
 .q-text {
-  font-size: clamp(1.3rem, 2.9vw, 1.85rem);
+  font-size: clamp(1.25rem, 2.6vw, 1.65rem);
   font-weight: 600;
-  line-height: 1.22;
+  line-height: 1.25;
   letter-spacing: -0.018em;
-  max-width: 26ch;
+  max-width: 36ch;
   margin-bottom: 1.1rem;
+  text-wrap: pretty;
 }
 .q-follow {
   font-size: 1rem;
+  font-style: italic;
   color: var(--ink-muted);
   max-width: 42ch;
   text-wrap: pretty;

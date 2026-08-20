@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { search, type Hit } from "@/lib/search";
 import { CYCLES, useDemo } from "@/lib/useDemo";
-import { HERO_SEARCH_ID, summonSearch } from "@/lib/summon";
+import { HERO_SEARCH_ID, SUMMON_QUERY_EVENT, summonSearch } from "@/lib/summon";
 import { useModKey } from "@/lib/useModKey";
 import { useScrolledPastHero } from "@/lib/useScrolledPastHero";
 import { SearchSurface } from "./SearchSurface";
@@ -90,6 +90,18 @@ export function HeroSearch() {
       document.removeEventListener("pointerdown", end);
       document.removeEventListener("keydown", end);
     };
+  }, []);
+
+  // A link in the copy below can summon the box with a query already typed —
+  // the note's printed example runs through the same input as everything else.
+  // Adopting it as the user's query also takes the timeline off the box.
+  useEffect(() => {
+    const onQuery = (e: Event) => {
+      const q = (e as CustomEvent<string>).detail;
+      if (typeof q === "string") setUserQuery(q);
+    };
+    document.addEventListener(SUMMON_QUERY_EVENT, onQuery);
+    return () => document.removeEventListener(SUMMON_QUERY_EVENT, onQuery);
   }, []);
 
   // ⌘K / Ctrl-K from anywhere on the page, and Escape to put a document down.

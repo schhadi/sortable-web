@@ -4,8 +4,16 @@
 
 export const HERO_SEARCH_ID = "hero-search";
 
-export function summonSearch() {
+/** HeroSearch listens for this; the detail is a query to adopt as the user's. */
+export const SUMMON_QUERY_EVENT = "findable:summon-query";
+
+export function summonSearch(query?: string) {
   window.scrollTo({ top: 0, behavior: "smooth" });
   const input = document.getElementById(HERO_SEARCH_ID);
   if (input instanceof HTMLInputElement) input.focus({ preventScroll: true });
+  // Guarded by type, not by presence: callers passing this straight to onClick
+  // hand it a MouseEvent, which must not end up typed into the box.
+  if (typeof query === "string") {
+    document.dispatchEvent(new CustomEvent(SUMMON_QUERY_EVENT, { detail: query }));
+  }
 }
