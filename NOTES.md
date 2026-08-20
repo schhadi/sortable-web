@@ -3,6 +3,28 @@
 Nothing in this file is rendered on the page. It records the choices behind the
 note, and the questions those choices leave open.
 
+## The note's second draft is now the page (August 2026)
+
+The page's copy was replaced wholesale with `Findable_Concept_Note_1.md`: the
+hero is the note's title page (kicker, wordmark, tagline) over the live search
+box, followed by the problem, what it is, the ten-feature grid, the two
+promises, who it's for, and the note's closing line as the coda. The design
+system is unchanged. Three judgement calls made in the process:
+
+- **The response form is mounted again**, carrying the note's five questions in
+  place of the old three — so "the one thing the redesign took away" is back.
+  The copy-answers flow and the empty `RECIPIENT_EMAIL` are untouched.
+- **The €79 scene survives, though the note does not mention a price.** The
+  note's question one ("is this a real problem for you?") replaces the old
+  "would you pay €79?" framing, but the number stated flat was a deliberate
+  strategy from the brief, so it stays between "who it's for" and the
+  questions. If the note's silence on price was a decision rather than an
+  omission, the scene is one `<section>` in `app/page.tsx` to delete.
+- **The note's printed search example runs live.** The "moral economy of the
+  crowd" example is an inline link (`components/SummonLink.tsx`) that summons
+  the hero box with the query typed into it — the example and the product stay
+  one code path, like the demo.
+
 ## Carried over from the brief
 
 - **"Findable" is a placeholder name, not a recommendation.** Check trademark
@@ -61,7 +83,9 @@ price, the coda), the search box lifts off the page as a card with its results
 floating clear beneath it, and the masthead is replaced by a bar that only
 arrives once the hero is behind you.
 
-- **The three questions are gone.** The redesign has no response form, no
+- **The three questions are gone.** *(Since reversed — see the section above:
+  the form is mounted again with the note's five questions.)* The redesign has
+  no response form, no
   reply address and no mechanism of any kind for sending an answer back — only
   the coda's standing invitation to argue. That is a real loss for a note whose
   entire purpose is to collect three answers, and it is the first thing to

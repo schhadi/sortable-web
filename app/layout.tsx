@@ -16,7 +16,7 @@ const serif = Source_Serif_4({
 export const metadata: Metadata = {
   title: `${BRAND} — an early concept`,
   description:
-    "A concept note: search your own research library by what you remember of a document, not by what the file is called. Nothing has been built yet.",
+    "Every document you own, searchable by a half-remembered sentence. A concept note — nothing has been built yet.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

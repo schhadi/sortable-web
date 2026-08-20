@@ -1,32 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import { PRICE, RECIPIENT_EMAIL } from "@/lib/config";
+import { RECIPIENT_EMAIL } from "@/lib/config";
 
+// The note's five questions, verbatim from Findable_Concept_Note_1.md. Only
+// question one carries a follow-up there; the others stand on their own.
 const QUESTIONS = [
   {
     n: "Question one",
-    q: `Would you spend ${PRICE} of your own money on this?`,
-    follow: "If not, what is it worth? A number is more useful to me than a compliment.",
-    placeholder: "Yes, because… / No, and here is what I would actually pay…",
+    q: "Is this a real problem for you, or does your current arrangement work well enough?",
+    follow: "An honest “I’m fine” is the most useful answer you can give me.",
+    placeholder: "Honestly, I’m fine, because… / Yes — the last time it bit me was…",
   },
   {
     n: "Question two",
-    q: "What is the one thing that would stop you using it?",
-    follow: "Not a list. The one thing.",
-    placeholder: "The thing that would stop me is…",
+    q: "Roughly how many documents are on your computer right now that you could not locate within a minute?",
+    follow: "",
+    placeholder: "At a guess…",
   },
   {
     n: "Question three",
+    q: "Of the features described above, which would actually change how you work — and which would you never use?",
+    follow: "",
+    placeholder: "Would change how I work:… / Would never use:…",
+  },
+  {
+    n: "Question four",
+    q: "What is the one thing that would stop you using it?",
+    follow: "",
+    placeholder: "The thing that would stop me is…",
+  },
+  {
+    n: "Question five",
     q: "What have I misunderstood about how you actually work?",
-    follow:
-      "Assume I have got something wrong about your day, your files, or your habits. What is it?",
+    follow: "",
     placeholder: "What you have got wrong is…",
   },
 ];
 
 export function ResponseForm() {
-  const [answers, setAnswers] = useState(["", "", ""]);
+  const [answers, setAnswers] = useState(() => QUESTIONS.map(() => ""));
   const [status, setStatus] = useState("");
 
   const filled = answers.some((a) => a.trim().length > 0);
@@ -47,9 +60,9 @@ export function ResponseForm() {
 
   return (
     <section className="questions" id="questions" aria-labelledby="questions-title">
-      <p className="kicker">Three questions</p>
+      <p className="kicker">What I’d genuinely like to know from you</p>
       <h2 id="questions-title" className="sr-only">
-        Three questions
+        What I’d genuinely like to know from you
       </h2>
 
       <ol className="q-list">
@@ -57,7 +70,7 @@ export function ResponseForm() {
           <li className="q-item" key={q.n}>
             <p className="q-num">{q.n}</p>
             <p className="q-text">{q.q}</p>
-            <p className="q-follow">{q.follow}</p>
+            {q.follow ? <p className="q-follow">{q.follow}</p> : null}
             <label className="sr-only" htmlFor={`answer-${i}`}>
               {q.q}
             </label>
@@ -83,7 +96,7 @@ export function ResponseForm() {
             <a
               className="btn btn-secondary"
               href={`mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(
-                "Three questions",
+                "Five questions",
               )}&body=${encodeURIComponent(compose())}`}
             >
               Open in email
